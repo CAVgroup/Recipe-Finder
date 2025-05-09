@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeBtn = document.querySelector('.close-btn');
 
     // API configuration
-    const API_KEY = '1'; // Using a public API that doesn't require a key
+    const API_KEY = '1';
     const API_URL = 'https://www.themealdb.com/api/json/v1/1/';
     
     // Event Listeners
@@ -119,6 +119,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Display recipe details in modal
     function displayRecipeDetails(recipe) {
+        document.body.classList.add('body-no-scroll');
+        
         modalContent.innerHTML = `
             <div class="recipe-modal-content">
                 <div class="recipe-modal-header">
@@ -158,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         
         modal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
+        modalContent.focus();
         
         // Add event listener to favorite button
         const favoriteBtn = document.querySelector('.favorite-btn');
@@ -167,7 +169,6 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.backgroundColor = '#4ecdc4';
             this.style.color = 'white';
             
-            // In a real app, you would save to localStorage or a database
             setTimeout(() => {
                 this.innerHTML = '<i class="far fa-heart"></i> Add to Favorites';
                 this.style.backgroundColor = '';
@@ -200,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Close modal
     function closeModal() {
         modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        document.body.classList.remove('body-no-scroll');
     }
 
     // Close modal when clicking outside
@@ -209,4 +210,13 @@ document.addEventListener('DOMContentLoaded', function() {
             closeModal();
         }
     }
+
+    // Keyboard accessibility for scrolling
+    document.addEventListener('keydown', function(e) {
+        if (modal.style.display === 'block') {
+            if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                e.preventDefault();
+            }
+        }
+    });
 });
