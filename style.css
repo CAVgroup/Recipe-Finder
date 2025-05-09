@@ -23,6 +23,8 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    min-height: 100vh;
+    overflow-y: auto;
 }
 
 header {
@@ -103,6 +105,9 @@ header p {
 
 .results-container {
     margin-top: 30px;
+    max-height: calc(100vh - 300px);
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
 .results-container h2 {
@@ -192,14 +197,15 @@ header p {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 5% auto;
-    padding: 30px;
+    margin: 2% auto;
+    padding: 20px;
     border-radius: 10px;
-    width: 80%;
+    width: 90%;
     max-width: 800px;
-    max-height: 80vh;
+    max-height: 90vh;
     overflow-y: auto;
     position: relative;
+    -webkit-overflow-scrolling: touch;
 }
 
 .close-btn {
@@ -311,6 +317,29 @@ header p {
     margin-right: 5px;
 }
 
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+.body-no-scroll {
+    overflow: hidden;
+}
+
 @media (max-width: 768px) {
     .recipe-modal-header {
         flex-direction: column;
@@ -318,6 +347,7 @@ header p {
     
     .recipe-modal-img {
         width: 100%;
+        max-height: 200px;
     }
     
     .search-container input {
@@ -326,6 +356,16 @@ header p {
     
     .search-container button {
         width: 48%;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10px auto;
+        padding: 15px;
+    }
+    
+    .results-container {
+        max-height: calc(100vh - 350px);
     }
 }
 
